@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fake News Detection</title>
+    <link rel="stylesheet" href="{% static 'classifier/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Fake News Detection</h1>
+        <form method="post" novalidate>
+            {% csrf_token %}
+            {{ form.news_text }}
+            <button type="submit">Check News</button>
+        </form>
+        {% if prediction %}
+            <div class="prediction-result {% if prediction == 'Real' %}real{% elif prediction == 'Fake' %}fake{% endif %}">
+            Prediction: {{ prediction }}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
